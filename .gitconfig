@@ -1,0 +1,31 @@
+[user]
+    name = Lane Liles
+    email = lane.liles@gmail.com
+[core]
+    editor = nano
+    autocrlf = false
+[diff]
+    tool = meld
+[difftool "meld"]
+    keepBackup = false
+    trustExitCode = false
+[merge]
+    tool = meld
+[mergetool "meld"]
+    keepBackup = false
+    trustExitCode = false
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    log = auto
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[alias]
+    pu = push
+    pr = pull --rebase 
+    st = status
+    l = log
+    c = commit -m 
