@@ -1,38 +1,35 @@
-# sourced files
-# mac
-if [ -f /Users/lane/dev/leiningen/bash_completion.bash ]; then
-    . /Users/lane/dev/leiningen/bash_completion.bash
-fi
-if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-    . /usr/local/etc/bash_completion.d/git-completion.bash
-fi
-#ubuntu
-if [ -f /home/lane/apps/leiningen/bash_completion.bash ]; then
-    . /home/lane/apps/leiningen/bash_completion.bash
-fi
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
+# path
+export PATH=$PATH:~/.lein/bin
 
-# java 
-#export JAVA_HOME=/Library/Java/Home
-#export JRE_HOME=$JAVA_HOME
-#export CATALINA_HOME=/Applications/Tomcat
+# environment
+# export JAVA_HOME=/Library/Java/Home
+# export JRE_HOME=$JAVA_HOME
 
-# terminal colors
-export TERM=xterm-256color
+# aliases
+alias ..='cd ..'
+alias ...='cd .. ; cd ..'
+alias ll='ls -lh'
+alias lll='ll|less'
+alias lal='ls -alh'
+alias hs='history | grep'
+alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+alias mysql_start='mysql.server start'
+alias mysql_stop='mysql.server stop'
+alias mongo_start='mongod run --config /usr/local/Cellar/mongodb/1.8.2-x86_64/mongod.conf >> /usr/local/Cellar/mongodb/1.8.2-x86_64/mongod.log &'
+alias emacs='/usr/local/Cellar/emacs/HEAD/Emacs.app/Contents/MacOS/Emacs -nw'
+alias ystart='hybris/bin/platform/hybrisserver.sh debug'
+alias yant='cd hybris/bin/platform && . ./setantenv.sh && cd -'
+# shows most used commands
+alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
-# custom functions
-ystart () {
-    hybris/bin/platform/hybrisserver.sh debug
-}
-export -f ystart
-yant () {
-    cd hybris/bin/platform && . ./setantenv.sh && cd -
-}
-export -f yant
+# bash completions (depends on pkgs installed thru homebrew)
+. /usr/local/Library/Contributions/brew_bash_completion.sh
+. /usr/local/etc/bash_completion.d/lein-completion.bash
+. /usr/local/etc/bash_completion.d/git-completion.bash
+. /usr/local/etc/bash_completion.d/tmux
 
-# bash completions
+# custom bash completions
 _complete_ssh_hosts ()
 {
         COMPREPLY=()
@@ -63,6 +60,32 @@ _complete_mvn_goals ()
   return 0
 }
 complete -F _complete_mvn_goals mvn
+
+# history 
+export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+# append history from current session rather than overwrite
+shopt -s histappend
+# write multiline commands as a single line in history
+shopt -s cmdhist
+# ignore commands starting with space and dupes
+export HISTCONTROL=ignoreboth
+# read and append new history
+# PROMPT_COMMAND='$PROMPT_COMMAND;history -n;history -a'
+
+# color options for misc commands
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='1;36'
+
+# fixing reverse search in Terminal.app
+# added \[ & \] to all escape sequences above
+# set TERM="xterm" instead of "xterm-color"
+# export TERM="xterm"
+# set 'shopt -s checkwinsize' to check window size before each prompt
+# shopt -s checkwinsize 
 
 # friendly ansi color names
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -99,54 +122,6 @@ bakcyn='\[\e[46m\]'   # Cyan
 bakwht='\[\e[47m\]'   # White
 txtrst='\[\e[0m\]'    # Text Reset
 
-# more colors
-export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
-# turn on grep coloring
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='1;36'
-
-
-# history 
-export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
-# append history from session to file rather than overwrite
-shopt -s histappend
-# write multiline commands as a single line in history
-shopt -s cmdhist
-# session history size
-export HISTSIZE=10000
-# file history size
-export HISTFILESIZE=10000
-# ignore commands starting with space and dupes
-export HISTCONTROL=ignoreboth
-# read history file
-# PROMPT_COMMAND='$PROMPT_COMMAND;history -n'
-# append to history file
-PROMPT_COMMAND='history -a'
-
-
-# fixing reverse search in Terminal.app
-# added \[ & \] to all escape sequences above
-# set TERM="xterm" instead of "xterm-color"
-#export TERM="xterm"
-# set 'shopt -s checkwinsize' to check window size before each prompt
-#shopt -s checkwinsize 
-
-# aliases
-alias ls='ls --color=auto'
-alias ll='ls -lh --color=auto'
-alias lll='ls -lh --color=always | less -R'
-alias lal='ls -alh --color=auto'
-alias hg='history | grep'
-alias psg='ps aux|grep'
-alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-alias mysql_start='mysql.server start'
-alias mysql_stop='mysql.server stop'
-
-# PATH
-export PATH=$PATH:~/apps/leiningen
-
 # prompt
 GIT_BRANCH='$(__git_ps1 " (%s)")'
 export PS1="${txtred}[${txtrst}\!${txtred}] ${txtgrn}\t ${txtblu}\u${txtwht}@${txtblu}\h:${txtylw}\w$GIT_BRANCH ${txtrst}$ "
@@ -156,10 +131,10 @@ else
   export PS1="${txtred}[${txtrst}\!${txtred}] ${txtgrn}\t ${txtblu}\u${txtwht}@${txtblu}\h:${txtylw}\w$GIT_BRANCH ${txtrst}$ "
 fi
 
-
 # mysql prompt
 export MYSQL_PS1="[\\r:\\m:\\s] \\u@\\h (\\d) > "
 
 # rvm
+export CC=gcc-4.2
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
