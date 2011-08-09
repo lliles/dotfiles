@@ -9,8 +9,9 @@ export PATH=$PATH:~/.lein/bin
 alias ..='cd ..'
 alias ...='cd .. ; cd ..'
 alias ll='ls -lh'
-alias lll='ll|less'
+alias lll='CLICOLOR_FORCE=true ll | less -R'
 alias lal='ls -alh'
+alias lall='CLICOLOR_FORCE=true lal | less -R'
 alias hs='history | grep'
 alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
@@ -23,11 +24,11 @@ alias yant='cd hybris/bin/platform && . ./setantenv.sh && cd -'
 # shows most used commands
 alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
-# bash completions (depends on pkgs installed thru homebrew)
-. /usr/local/Library/Contributions/brew_bash_completion.sh
-. /usr/local/etc/bash_completion.d/lein-completion.bash
-. /usr/local/etc/bash_completion.d/git-completion.bash
-. /usr/local/etc/bash_completion.d/tmux
+# bash completions
+[[ -s "/usr/local/Library/Contributions/brew_bash_completion.sh" ]] && source "/usr/local/Library/Contributions/brew_bash_completion.sh"
+[[ -s "/usr/local/etc/bash_completion.d/lein-completion.bash" ]] && source "/usr/local/etc/bash_completion.d/lein-completion.bash"
+[[ -s "/usr/local/etc/bash_completion.d/git-completion.bash" ]] && source "/usr/local/etc/bash_completion.d/git-completion.bash"
+[[ -s "/usr/local/etc/bash_completion.d/tmux" ]] && source "/usr/local/etc/bash_completion.d/tmux"
 
 # custom bash completions
 _complete_ssh_hosts ()
@@ -71,21 +72,12 @@ shopt -s histappend
 shopt -s cmdhist
 # ignore commands starting with space and dupes
 export HISTCONTROL=ignoreboth
-# read and append new history
-# PROMPT_COMMAND='$PROMPT_COMMAND;history -n;history -a'
 
 # color options for misc commands
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='1;36'
-
-# fixing reverse search in Terminal.app
-# added \[ & \] to all escape sequences above
-# set TERM="xterm" instead of "xterm-color"
-# export TERM="xterm"
-# set 'shopt -s checkwinsize' to check window size before each prompt
-# shopt -s checkwinsize 
+export GREP_COLOR='1;35'
 
 # friendly ansi color names
 txtblk='\[\e[0;30m\]' # Black - Regular
