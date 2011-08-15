@@ -18,7 +18,6 @@ alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias mysql_start='mysql.server start'
 alias mysql_stop='mysql.server stop'
 alias mongo_start='mongod run --config /usr/local/Cellar/mongodb/1.8.2-x86_64/mongod.conf >> /usr/local/Cellar/mongodb/1.8.2-x86_64/mongod.log &'
-alias emacs='/usr/local/Cellar/emacs/HEAD/Emacs.app/Contents/MacOS/Emacs -nw'
 alias ystart='hybris/bin/platform/hybrisserver.sh debug'
 alias yant='cd hybris/bin/platform && . ./setantenv.sh && cd -'
 # shows most used commands
@@ -29,6 +28,20 @@ alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 [[ -s "/usr/local/etc/bash_completion.d/lein-completion.bash" ]] && source "/usr/local/etc/bash_completion.d/lein-completion.bash"
 [[ -s "/usr/local/etc/bash_completion.d/git-completion.bash" ]] && source "/usr/local/etc/bash_completion.d/git-completion.bash"
 [[ -s "/usr/local/etc/bash_completion.d/tmux" ]] && source "/usr/local/etc/bash_completion.d/tmux"
+
+# emacs
+alias emacs='open -a /usr/local/Cellar/emacs/HEAD/Emacs.app "$@"'
+# emacs in the terminal
+ec () {
+    if ps x | grep -v 'grep' | grep 'Emacs' > /dev/null
+    then
+        /usr/local/Cellar/emacs/HEAD/Emacs.app/Contents/MacOS/bin/emacsclient -nw "$@"
+    else
+        /usr/local/Cellar/emacs/HEAD/bin/emacs -nw "$@"
+    fi
+}
+export -f ec
+export EDITOR='ec'
 
 # custom bash completions
 _complete_ssh_hosts ()
@@ -125,6 +138,15 @@ fi
 
 # mysql prompt
 export MYSQL_PS1="[\\r:\\m:\\s] \\u@\\h (\\d) > "
+
+# oracle instant client
+#export ORACLE_IC_HOME="/Users/lane/oracle/instantclient_10_2"
+#export ORACLE_HOME="$ORACLE_IC_HOME"
+#export TNS_ADMIN="$ORACLE_IC_HOME"
+#export PATH="$PATH:$ORACLE_IC_HOME"
+#export LD_LIBRARY_PATH="$ORACLE_IC_HOME"
+#export DYLD_LIBRARY_PATH="$ORACLE_IC_HOME"
+#export CLASSPATH="$ORACLE_IC_HOME/ojdbc14.jar:./"
 
 # rvm
 export CC=gcc-4.2
