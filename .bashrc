@@ -129,9 +129,8 @@ txtrst='\[\e[0m\]'    # Text Reset
 
 # prompt
 GIT_BRANCH='$(__git_ps1 " (%s)")'
-export PS1="${txtgrn}[${txtrst}\t${txtgrn}] ${txtblu}\u${txtwht}@${txtblu}\h:${txtylw}\w$GIT_BRANCH ${txtrst}$ "
 if [[ $EMACS = 't' ]]; then
-  export PS1="[\!] \t \u@\h:\w$GIT_BRANCH $ "
+  export PS1="\u@\h:\w$GIT_BRANCH $ "
 else
   export PS1="${txtgrn}[${txtrst}\t${txtgrn}] ${txtblu}\u${txtwht}@${txtblu}\h:${txtylw}\w$GIT_BRANCH ${txtrst}$ "
 fi
