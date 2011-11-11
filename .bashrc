@@ -17,7 +17,7 @@ alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/ser
 alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias mysql_start='mysql.server start'
 alias mysql_stop='mysql.server stop'
-alias mongo_start='mongod run --config /usr/local/Cellar/mongodb/1.8.2-x86_64/mongod.conf >> /usr/local/Cellar/mongodb/1.8.2-x86_64/mongod.log &'
+alias mongo_start='mongod run --config /usr/local/Cellar/mongodb/2.0.1-x86_64/mongod.conf >> /usr/local/Cellar/mongodb/1.8.2-x86_64/mongod.log &'
 alias ystart='hybris/bin/platform/hybrisserver.sh debug'
 alias yant='cd hybris/bin/platform && . ./setantenv.sh && cd -'
 # shows most used commands
@@ -28,6 +28,7 @@ alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 [[ -s "/usr/local/etc/bash_completion.d/lein-completion.bash" ]] && source "/usr/local/etc/bash_completion.d/lein-completion.bash"
 [[ -s "/usr/local/etc/bash_completion.d/git-completion.bash" ]] && source "/usr/local/etc/bash_completion.d/git-completion.bash"
 [[ -s "/usr/local/etc/bash_completion.d/tmux" ]] && source "/usr/local/etc/bash_completion.d/tmux"
+[[ -s "/usr/local/etc/bash_completion.d/scala" ]] && source "/usr/local/etc/bash_completion.d/scala"
 
 # emacs
 alias emacs='open -a /usr/local/Cellar/emacs/HEAD/Emacs.app "$@"'
