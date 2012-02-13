@@ -1,5 +1,6 @@
 # path
-export PATH=$PATH:~/.lein/bin
+# updated git instead of system git
+export PATH=/usr/local/Cellar/git/1.7.9/bin:$PATH
 
 # environment
 # export JAVA_HOME=/Library/Java/Home
@@ -149,6 +150,6 @@ export MYSQL_PS1="[\\r:\\m:\\s] \\u@\\h (\\d) > "
 #export CLASSPATH="$ORACLE_IC_HOME/ojdbc14.jar:./"
 
 # rvm
-export CC=gcc-4.2
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+#export CC=gcc-4.2
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
