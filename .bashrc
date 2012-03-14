@@ -1,5 +1,5 @@
 # path
-# updated git instead of system git
+# use homebrew git instead of system git
 export PATH=/usr/local/Cellar/git/1.7.9/bin:$PATH
 
 # environment
