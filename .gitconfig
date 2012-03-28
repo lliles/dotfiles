@@ -2,30 +2,33 @@
     name = Lane Liles
     email = lane.liles@gmail.com
 [core]
-    editor = nano
+    editor = ec
     autocrlf = false
+
+[color]
+    ui = true
+[alias]
+    st = status
+    l = log
+    pr = pull --rebase 
+    cm = commit -m 
+    co = checkout
+
 [diff]
-    tool = meld
+    tool = kdiff3
+[difftool "kdiff3"]
+    keepBackup = false
+    trustExitCode = false
 [difftool "meld"]
     keepBackup = false
     trustExitCode = false
+
 [merge]
-    tool = meld
+    tool = kdiff3
+[mergetool "kdiff3"]
+    keepBackup = false
+    trustExitCode = false
 [mergetool "meld"]
     keepBackup = false
     trustExitCode = false
-[color]
-    diff = auto
-    status = auto
-    branch = auto
-    log = auto
-[color "status"]
-    added = yellow
-    changed = green
-    untracked = cyan
-[alias]
-    pu = push
-    pr = pull --rebase 
-    st = status
-    l = log
-    c = commit -m 
+
