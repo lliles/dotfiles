@@ -6,7 +6,7 @@
     autocrlf = false
 
 [color]
-    ui = true
+    ui = auto
 [alias]
     st = status
     l = log
@@ -15,7 +15,11 @@
     co = checkout
 
 [diff]
-    tool = kdiff3
+    tool = diffmerge
+[difftool "diffmerge"]
+    keepBackup = false
+    trustExitCode = true
+    cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
 [difftool "kdiff3"]
     keepBackup = false
     trustExitCode = false
@@ -24,10 +28,14 @@
     trustExitCode = false
 
 [merge]
-    tool = kdiff3
+    tool = diffmerge
+[mergetool "diffmerge"]
+    keepBackup = false
+    trustExitCode = true
+    cmd = diffmerge $LOCAL $REMOTE
 [mergetool "kdiff3"]
     keepBackup = false
-    trustExitCode = false
+    trustExitCode = true
 [mergetool "meld"]
     keepBackup = false
     trustExitCode = false
