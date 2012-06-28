@@ -19,7 +19,7 @@
 [difftool "diffmerge"]
     keepBackup = false
     trustExitCode = true
-    cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
+    cmd = diffmerge \"$LOCAL\" \"$REMOTE\"
 [difftool "kdiff3"]
     keepBackup = false
     trustExitCode = false
@@ -32,7 +32,7 @@
 [mergetool "diffmerge"]
     keepBackup = false
     trustExitCode = true
-    cmd = diffmerge $LOCAL $REMOTE
+    cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
 [mergetool "kdiff3"]
     keepBackup = false
     trustExitCode = true
