@@ -1,6 +1,6 @@
 # path
 # use homebrew git instead of system git
-export PATH=/usr/local/Cellar/git/1.7.9/bin:$PATH
+export PATH=/usr/local/Cellar/git/1.7.9/bin:$PATH:$HOME/.rvm/bin
 
 # environment
 # export JAVA_HOME=/Library/Java/Home
