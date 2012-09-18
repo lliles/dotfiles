@@ -14,6 +14,7 @@ alias lll='CLICOLOR_FORCE=true ll | less -R'
 alias lal='ls -alh'
 alias lall='CLICOLOR_FORCE=true lal | less -R'
 alias hs='history | grep'
+alias g='git'
 alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias mysql_start='mysql.server start'
@@ -21,6 +22,7 @@ alias mysql_stop='mysql.server stop'
 alias mongo_start='mongod run --config /usr/local/Cellar/mongodb/2.0.3-x86_64/mongod.conf >> /usr/local/var/mongodb/mongod.log &'
 alias ystart='hybris/bin/platform/hybrisserver.sh debug'
 alias yant='cd hybris/bin/platform && . ./setantenv.sh && cd -'
+alias ysolr='java -Dsolr.solr.home=multicore -jar start.jar'
 # shows most used commands
 alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
