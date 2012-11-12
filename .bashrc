@@ -33,14 +33,14 @@ alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 [[ -s "/usr/local/etc/bash_completion.d/scala" ]] && source "/usr/local/etc/bash_completion.d/scala"
 
 # emacs
-alias emacs='open -a /usr/local/Cellar/emacs/24.1/Emacs.app "$@"'
+alias emacs='open -a /usr/local/Cellar/emacs/24.2/Emacs.app "$@"'
 # emacs in the terminal
 ec () {
     if ps x | grep -v 'grep' | grep 'Emacs' > /dev/null
     then
-        /usr/local/Cellar/emacs/24.1/bin/emacsclient -nw "$@"
+        /usr/local/Cellar/emacs/24.2/bin/emacsclient -nw "$@"
     else
-        /usr/local/Cellar/emacs/24.1/bin/emacs -nw "$@"
+        /usr/local/Cellar/emacs/24.2/bin/emacs -nw "$@"
     fi
 }
 export -f ec
