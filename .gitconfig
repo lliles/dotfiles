@@ -48,4 +48,3 @@
 [mergetool "meld"]
     keepBackup = false
     trustExitCode = false
-
