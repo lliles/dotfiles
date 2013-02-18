@@ -1,6 +1,6 @@
 # path
 # use homebrew git instead of system git
-export PATH=/usr/local/Cellar/git/1.7.9/bin:$PATH:$HOME/.rvm/bin
+export PATH=/usr/local/Cellar/git/1.8.1.3/bin:$PATH:$HOME/.rvm/bin
 
 # environment
 # export JAVA_HOME=/Library/Java/Home
@@ -14,6 +14,7 @@ alias lll='CLICOLOR_FORCE=true ll | less -R'
 alias lal='ls -alh'
 alias lall='CLICOLOR_FORCE=true lal | less -R'
 alias hs='history | grep'
+alias pg='ps aux | grep'
 alias g='git'
 alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
@@ -27,8 +28,9 @@ alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 
 # bash completions
 [[ -s "/usr/local/Library/Contributions/brew_bash_completion.sh" ]] && source "/usr/local/Library/Contributions/brew_bash_completion.sh"
-[[ -s "/usr/local/etc/bash_completion.d/lein-completion.bash" ]] && source "/usr/local/etc/bash_completion.d/lein-completion.bash"
+[[ -s "~/.lein/bash-completion.bash" ]] && source "~/.lein/bash-completion.bash"
 [[ -s "/usr/local/etc/bash_completion.d/git-completion.bash" ]] && source "/usr/local/etc/bash_completion.d/git-completion.bash"
+[[ -s "/usr/local/etc/bash_completion.d/git-prompt.sh" ]] && source "/usr/local/etc/bash_completion.d/git-prompt.sh"
 [[ -s "/usr/local/etc/bash_completion.d/tmux" ]] && source "/usr/local/etc/bash_completion.d/tmux"
 [[ -s "/usr/local/etc/bash_completion.d/scala" ]] && source "/usr/local/etc/bash_completion.d/scala"
 
@@ -82,12 +84,16 @@ complete -F _complete_mvn_goals mvn
 export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
 export HISTSIZE=100000
 export HISTFILESIZE=100000
+# ignore commands starting with space and dupes
+export HISTCONTROL=ignoreboth
 # append history from current session rather than overwrite
 shopt -s histappend
 # write multiline commands as a single line in history
 shopt -s cmdhist
-# ignore commands starting with space and dupes
-export HISTCONTROL=ignoreboth
+# enable ** glob directory style matching
+# shopt -s globstar - performance seems really bad!
+# enable automatic cd
+shopt -s autocd
 
 # color options for misc commands
 export CLICOLOR=1
@@ -153,4 +159,3 @@ export MYSQL_PS1="[\\r:\\m:\\s] \\u@\\h (\\d) > "
 # rvm
 #export CC=gcc-4.2
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
