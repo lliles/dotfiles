@@ -141,7 +141,7 @@ GIT_BRANCH='$(__git_ps1 " (%s)")'
 if [[ $EMACS = 't' ]]; then
   export PS1="\u@\h:\w$GIT_BRANCH $ "
 else
-  export PS1="${txtgrn}[${txtrst}\t${txtgrn}] ${txtblu}\u${txtwht}@${txtblu}\h:${txtylw}\w$GIT_BRANCH ${txtrst}$ "
+  export PS1="${txtgrn}[${txtrst}\t${txtgrn}] ${txtblu}\u${txtwht}@${txtblu}\h:${txtylw}\w$GIT_BRANCH ${txtrst}\n$ "
 fi
 
 # mysql prompt
