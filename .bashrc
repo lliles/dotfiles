@@ -1,6 +1,6 @@
 # path
 # use homebrew git instead of system git
-export PATH=/usr/local/Cellar/git/1.8.1.3/bin:$PATH:$HOME/.rvm/bin
+export PATH=/usr/local/Cellar/git/1.8.2.1/bin:$PATH:$HOME/.rvm/bin
 
 # environment
 # export JAVA_HOME=/Library/Java/Home
@@ -15,7 +15,6 @@ alias lal='ls -alh'
 alias lall='CLICOLOR_FORCE=true lal | less -R'
 alias hs='history | grep'
 alias pg='ps aux | grep'
-alias g='git'
 alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias mysql_start='mysql.server start'
@@ -48,28 +47,12 @@ ec () {
 export -f ec
 export EDITOR='ec'
 
-# custom bash completions
-_complete_ssh_hosts ()
-{
-        COMPREPLY=()
-        cur="${COMP_WORDS[COMP_CWORD]}"
-        comp_ssh_hosts=`cat ~/.ssh/known_hosts | \
-                        cut -f 1 -d ' ' | \
-                        sed -e s/,.*//g | \
-                        grep -v ^# | \
-                        uniq | \
-                        grep -v "\[" ;
-                if [ -f ~/.ssh/config ]; then
-                        cat ~/.ssh/config | \
-                                grep "^Host " | \
-                                awk '{print $2}'
-                fi
-                `
-        COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
-        return 0
-}
-complete -F _complete_ssh_hosts ssh scp sftp
+# homebrew bash completions
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
 
+# custom bash completions
 _complete_mvn_goals ()
 {
   COMPREPLY=()

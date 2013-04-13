@@ -4,6 +4,7 @@
 [core]
     editor = ec
     autocrlf = false
+    mergeoptions = --no-edit
 
 [color]
     ui = auto
