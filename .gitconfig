@@ -15,6 +15,13 @@
     cm = commit -m 
     co = checkout
 
+    # log views
+    ll = log --pretty=format:"%C(auto,green)%h\\ %C(auto,yellow)%ai%C(auto,red)%d\\ %C(auto,reset)%s%C(auto,blue)\\ [%cn]" --decorate 
+    lal = log --pretty=format:"%C(auto,green)%h\\ %C(auto,yellow)%ai%C(auto,red)%d\\ %C(auto,reset)%s%C(auto,blue)\\ [%cn]" --decorate --numstat
+
+    # list aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+
 [diff]
     tool = Kaleidoscope
 [difftool]
