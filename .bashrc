@@ -1,10 +1,11 @@
 # path
 # use homebrew git instead of system git
-export PATH=/usr/local/Cellar/git/1.8.2.1/bin:$PATH:$HOME/.rvm/bin
+export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin
 
 # environment
-# export JAVA_HOME=/Library/Java/Home
+export JAVA_HOME=$(/usr/libexec/java_home)
 # export JRE_HOME=$JAVA_HOME
+export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
 
 # aliases
 alias ..='cd ..'
@@ -51,6 +52,8 @@ export EDITOR='ec'
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
+# homebrew keep info files
+export HOMEBREW_KEEP_INFO=1
 
 # custom bash completions
 _complete_mvn_goals ()
@@ -142,3 +145,6 @@ export MYSQL_PS1="[\\r:\\m:\\s] \\u@\\h (\\d) > "
 # rvm
 #export CC=gcc-4.2
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
