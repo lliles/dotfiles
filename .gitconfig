@@ -1,14 +1,15 @@
 [user]
     name = Lane Liles
     email = lane.liles@gmail.com
+
 [core]
-    editor = ec
     autocrlf = false
-    mergeoptions = --no-edit
 
 [color]
     ui = auto
+
 [alias]
+    # frequently used
     st = status
     l = log
     pr = pull --rebase 

@@ -1,11 +1,13 @@
 # path
-# use homebrew git instead of system git
+# put homebrew ahead of everything
 export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin
 
-# environment
+# java environment
 export JAVA_HOME=$(/usr/libexec/java_home)
 # export JRE_HOME=$JAVA_HOME
 export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
+# java 6 home helper
+alias set-java-home-6='export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home"'
 
 # aliases
 alias ..='cd ..'
@@ -23,48 +25,21 @@ alias mysql_stop='mysql.server stop'
 alias ystart='hybris/bin/platform/hybrisserver.sh debug'
 alias yant='cd hybris/bin/platform && . ./setantenv.sh && cd -'
 alias ysolr='java -Dsolr.solr.home=multicore -jar start.jar'
-# shows most used commands
+
+# show most used commands
 alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
 # bash completions
-[[ -s "/usr/local/Library/Contributions/brew_bash_completion.sh" ]] && source "/usr/local/Library/Contributions/brew_bash_completion.sh"
-[[ -s "~/.lein/bash-completion.bash" ]] && source "~/.lein/bash-completion.bash"
-[[ -s "/usr/local/etc/bash_completion.d/git-completion.bash" ]] && source "/usr/local/etc/bash_completion.d/git-completion.bash"
-[[ -s "/usr/local/etc/bash_completion.d/git-prompt.sh" ]] && source "/usr/local/etc/bash_completion.d/git-prompt.sh"
-[[ -s "/usr/local/etc/bash_completion.d/tmux" ]] && source "/usr/local/etc/bash_completion.d/tmux"
-[[ -s "/usr/local/etc/bash_completion.d/scala" ]] && source "/usr/local/etc/bash_completion.d/scala"
+[[ -f "~/.lein/bash-completion.bash" ]] && source "~/.lein/bash-completion.bash"
+[[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
 
-# emacs
+# editors (for git, emacs, & others)
+export EDITOR='/usr/local/bin/emacsclient -nw'
+export ALTERNATE_EDITOR='/usr/local/bin/emacs -nw'
+# emacs in the app
 alias emacs='open -a /Applications/Emacs.app "$@"'
 # emacs in the terminal
-ec () {
-    if ps x | grep -v 'grep' | grep 'Emacs' > /dev/null
-    then
-        /usr/local/Cellar/emacs/24.3/bin/emacsclient -nw "$@"
-    else
-        /usr/local/Cellar/emacs/24.3/bin/emacs -nw "$@"
-    fi
-}
-export -f ec
-export EDITOR='ec'
-
-# homebrew bash completions
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
-# homebrew keep info files
-export HOMEBREW_KEEP_INFO=1
-
-# custom bash completions
-_complete_mvn_goals ()
-{
-  COMPREPLY=()
-  cur="${COMP_WORDS[COMP_CWORD]}"
-  goals="clean compile install test tomcat:redeploy war:war"
-  COMPREPLY=( $(compgen -W "${goals}" -- ${cur}))
-  return 0
-}
-complete -F _complete_mvn_goals mvn
+alias e='/usr/local/bin/emacsclient -nw -a=/usr/local/bin/emacs "$@"'
 
 # history 
 export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
@@ -76,6 +51,8 @@ export HISTCONTROL=ignoreboth
 shopt -s histappend
 # write multiline commands as a single line in history
 shopt -s cmdhist
+
+# cd options
 # enable ** glob directory style matching
 # shopt -s globstar - performance seems really bad!
 # enable automatic cd

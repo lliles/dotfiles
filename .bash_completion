@@ -1,0 +1,10 @@
+# maven
+_complete_mvn_goals ()
+{
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  goals="clean compile install test tomcat:redeploy war:war tomcat7:run"
+  COMPREPLY=( $(compgen -W "${goals}" -- ${cur}))
+  return 0
+}
+complete -F _complete_mvn_goals mvn
