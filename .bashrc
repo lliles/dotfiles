@@ -1,6 +1,6 @@
 # path
 # put homebrew ahead of everything
-export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin
+export PATH=/usr/local/bin:$PATH
 
 # java environment
 export JAVA_HOME=$(/usr/libexec/java_home)
@@ -119,9 +119,10 @@ export MYSQL_PS1="[\\r:\\m:\\s] \\u@\\h (\\d) > "
 #export DYLD_LIBRARY_PATH="$ORACLE_IC_HOME"
 #export CLASSPATH="$ORACLE_IC_HOME/ojdbc14.jar:./"
 
-# rvm
-#export CC=gcc-4.2
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+#export PATH="/usr/local/heroku/bin:$PATH"
+
+# rvm
+export PATH="$PATH:$HOME/.rvm/bin"
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
