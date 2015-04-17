@@ -29,6 +29,7 @@ alias redis_start='redis-server /usr/local/etc/redis.conf'
 alias ystart='hybris/bin/platform/hybrisserver.sh debug'
 alias yant='cd hybris/bin/platform && . ./setantenv.sh && cd -'
 alias ysolr='java -Dsolr.solr.home=multicore -jar start.jar'
+alias redis_start='redis-server /usr/local/etc/redis.conf'
 
 # show most used commands
 alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
