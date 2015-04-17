@@ -2,6 +2,9 @@
 # put homebrew ahead of everything
 export PATH=/usr/local/bin:$PATH
 
+# secrets
+[[ -f "$HOME/.secrets" ]] && source "$HOME/.secrets"
+
 # java environment
 export JAVA_HOME=$(/usr/libexec/java_home)
 # export JRE_HOME=$JAVA_HOME
@@ -22,6 +25,7 @@ alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/ser
 alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias mysql_start='mysql.server start'
 alias mysql_stop='mysql.server stop'
+alias redis_start='redis-server /usr/local/etc/redis.conf'
 alias ystart='hybris/bin/platform/hybrisserver.sh debug'
 alias yant='cd hybris/bin/platform && . ./setantenv.sh && cd -'
 alias ysolr='java -Dsolr.solr.home=multicore -jar start.jar'
@@ -30,7 +34,7 @@ alias ysolr='java -Dsolr.solr.home=multicore -jar start.jar'
 alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
 # bash completions
-[[ -f "~/.lein/bash-completion.bash" ]] && source "~/.lein/bash-completion.bash"
+[[ -f "$HOME/.lein/bash-completion.bash" ]] && source "$HOME/.lein/bash-completion.bash"
 [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
 
 # editors (for git, emacs, & others)
