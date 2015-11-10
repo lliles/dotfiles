@@ -6,7 +6,9 @@ export PATH=/usr/local/bin:$PATH
 [[ -f "$HOME/.secrets" ]] && source "$HOME/.secrets"
 
 # java environment
-export JAVA_HOME=$(/usr/libexec/java_home)
+# export JAVA_HOME=$(/usr/libexec/java_home)
+# /usr/libexec/java_home -v '1.8*'
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home
 # export JRE_HOME=$JAVA_HOME
 export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
 # java 6 home helper
@@ -37,6 +39,7 @@ alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 # bash completions
 [[ -f "$HOME/.lein/bash-completion.bash" ]] && source "$HOME/.lein/bash-completion.bash"
 [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
+complete -C aws_completer aws
 
 # editors (for git, emacs, & others)
 export EDITOR='/usr/local/bin/emacsclient -nw'
@@ -129,6 +132,6 @@ export MYSQL_PS1="[\\r:\\m:\\s] \\u@\\h (\\d) > "
 
 # rvm
 export PATH="$PATH:$HOME/.rvm/bin"
-# Load RVM into a shell session *as a function*
+# Load RVM into a shell session as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
