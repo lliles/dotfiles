@@ -37,9 +37,13 @@ alias es_start='elasticsearch --config=/usr/local/opt/elasticsearch/config/elast
 alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
 # bash completions
-[[ -f "$HOME/.lein/bash-completion.bash" ]] && source "$HOME/.lein/bash-completion.bash"
+[[ -f "$HOME/.lein/bash_completion.bash" ]] && source "$HOME/.lein/bash_completion.bash"
 [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
 complete -C aws_completer aws
+
+# AWS
+export AWS_DEFAULT_PROFILE=LILES01
+alias awsll="aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[?Key==\`Name\`].Value | [0],InstanceId,PublicIpAddress,PrivateIpAddress,State.Name,InstanceType]' --output table --filter Name=instance-state-name,Values=running,pending"
 
 # editors (for git, emacs, & others)
 export EDITOR='/usr/local/bin/emacsclient -nw'
