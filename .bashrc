@@ -6,13 +6,10 @@ export PATH=/usr/local/bin:$PATH
 [[ -f "$HOME/.secrets" ]] && source "$HOME/.secrets"
 
 # java environment
-# export JAVA_HOME=$(/usr/libexec/java_home)
-# /usr/libexec/java_home -v '1.8*'
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home
+# for OS X - /usr/libexec/java_home -v '1.8*'
+export JAVA_HOME=$(/usr/libexec/java_home)
 # export JRE_HOME=$JAVA_HOME
 export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
-# java 6 home helper
-alias set-java-home-6='export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home"'
 
 # aliases
 alias ..='cd ..'
