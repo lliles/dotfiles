@@ -14,6 +14,7 @@ export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
 # aliases
 alias ..='cd ..'
 alias ...='cd .. ; cd ..'
+alias g='git'
 alias ll='ls -lh'
 alias lll='CLICOLOR_FORCE=true ll | less -R'
 alias lal='ls -alh'
@@ -30,6 +31,10 @@ alias ysolr='java -Dsolr.solr.home=multicore -jar start.jar'
 alias redis_start='redis-server /usr/local/etc/redis.conf'
 alias es_start='elasticsearch --config=/usr/local/opt/elasticsearch/config/elasticsearch.yml'
 
+# tmux aliases
+alias tl='tmux ls'
+function ta { tmux attach -t "$1" || tmux new -s "$1"; }
+
 # show most used commands
 alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
@@ -37,6 +42,9 @@ alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' 
 [[ -f "$HOME/.lein/bash_completion.bash" ]] && source "$HOME/.lein/bash_completion.bash"
 [[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
 complete -C aws_completer aws
+# keep completion for aliased commands
+# g = git
+complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \ || complete -o default -o nospace -F _git g
 
 # AWS
 export AWS_DEFAULT_PROFILE=LILES01
@@ -62,8 +70,6 @@ shopt -s histappend
 shopt -s cmdhist
 
 # cd options
-# enable ** glob directory style matching
-# shopt -s globstar - performance seems really bad!
 # enable automatic cd
 shopt -s autocd
 
@@ -71,7 +77,10 @@ shopt -s autocd
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='1;35'
+export GREP_COLOR='1;33'
+
+# load base16 colors
+[[ -f "$HOME/dotfiles/base16-tomorrow.dark.sh" ]] && source "$HOME/dotfiles/base16-tomorrow.dark.sh"
 
 # friendly ansi color names
 txtblk='\[\e[0;30m\]' # Black - Regular
@@ -109,27 +118,15 @@ bakwht='\[\e[47m\]'   # White
 txtrst='\[\e[0m\]'    # Text Reset
 
 # prompt
-GIT_BRANCH='$(__git_ps1 " (%s)")'
+GIT_BRANCH='$(__git_ps1 "(%s)")'
 if [[ $EMACS = 't' ]]; then
-  export PS1="\u@\h:\w$GIT_BRANCH $ "
+  export PS1="\u@\h:\w $GIT_BRANCH $ "
 else
-  export PS1="${txtgrn}[${txtrst}\t${txtgrn}] ${txtblu}\u${txtwht}@${txtblu}\h:${txtylw}\w$GIT_BRANCH ${txtrst}\n$ "
+  export PS1="${txtgrn}[${txtrst}\t${txtgrn}] ${txtblu}\u${txtwht}@${txtblu}\h:${txtylw}\w $GIT_BRANCH ${txtrst}\n$ "
 fi
 
 # mysql prompt
 export MYSQL_PS1="[\\r:\\m:\\s] \\u@\\h (\\d) > "
-
-# oracle instant client
-#export ORACLE_IC_HOME="/Users/lane/oracle/instantclient_10_2"
-#export ORACLE_HOME="$ORACLE_IC_HOME"
-#export TNS_ADMIN="$ORACLE_IC_HOME"
-#export PATH="$PATH:$ORACLE_IC_HOME"
-#export LD_LIBRARY_PATH="$ORACLE_IC_HOME"
-#export DYLD_LIBRARY_PATH="$ORACLE_IC_HOME"
-#export CLASSPATH="$ORACLE_IC_HOME/ojdbc14.jar:./"
-
-### Added by the Heroku Toolbelt
-#export PATH="/usr/local/heroku/bin:$PATH"
 
 # rvm
 export PATH="$PATH:$HOME/.rvm/bin"
