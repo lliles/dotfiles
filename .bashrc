@@ -80,7 +80,7 @@ export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;33'
 
 # load base16 colors
-[[ -f "$HOME/dotfiles/base16-tomorrow.dark.sh" ]] && source "$HOME/dotfiles/base16-tomorrow.dark.sh"
+[[ -f "$HOME/dev/dotfiles/base16-tomorrow.dark.sh" ]] && source "$HOME/dev/dotfiles/base16-tomorrow.dark.sh"
 
 # friendly ansi color names
 txtblk='\[\e[0;30m\]' # Black - Regular
