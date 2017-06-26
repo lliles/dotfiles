@@ -47,7 +47,7 @@ complete -C aws_completer aws
 complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \ || complete -o default -o nospace -F _git g
 
 # AWS
-export AWS_DEFAULT_PROFILE=LILES01
+export AWS_DEFAULT_PROFILE=lane
 alias awsll="aws ec2 describe-instances --query 'Reservations[*].Instances[*].[Tags[?Key==\`Name\`].Value | [0],InstanceId,PublicIpAddress,PrivateIpAddress,State.Name,InstanceType]' --output table --filter Name=instance-state-name,Values=running,pending"
 
 # editors (for git, emacs, & others)
@@ -133,3 +133,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Load RVM into a shell session as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
