@@ -68,6 +68,8 @@ export HISTCONTROL=ignoreboth
 shopt -s histappend
 # write multiline commands as a single line in history
 shopt -s cmdhist
+# append each command to history as it happens, instead of at end of session
+PROMPT_COMMAND='history -a'
 
 # cd options
 # enable automatic cd
