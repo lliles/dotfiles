@@ -2,6 +2,8 @@
     name = Lane Liles
     email = lane.liles@gmail.com
 
+[init]
+    defaultBranch = main
 [core]
     autocrlf = false
 

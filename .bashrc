@@ -1,5 +1,4 @@
-# path
-# put homebrew ahead of everything
+# homebrew and local installs preferred
 export PATH=/usr/local/bin:$PATH
 
 # secrets
@@ -7,29 +6,29 @@ export PATH=/usr/local/bin:$PATH
 
 # java environment
 # for OS X - /usr/libexec/java_home -v '1.8*'
-export JAVA_HOME=$(/usr/libexec/java_home)
+# export JAVA_HOME=$(/usr/libexec/java_home)
 # export JRE_HOME=$JAVA_HOME
-export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
+# export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=256m'
 
 # aliases
-alias ..='cd ..'
-alias ...='cd .. ; cd ..'
+# alias ..='cd ..'
+# alias ...='cd .. ; cd ..'
 alias g='git'
 alias ll='ls -lh'
-alias lll='CLICOLOR_FORCE=true ll | less -R'
+# alias lll='CLICOLOR_FORCE=true ll | less -R'
 alias lal='ls -alh'
-alias lall='CLICOLOR_FORCE=true lal | less -R'
-alias hs='history | grep'
-alias pg='ps aux | grep'
-alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-alias mysql_start='mysql.server start'
-alias mysql_stop='mysql.server stop'
-alias ystart='hybris/bin/platform/hybrisserver.sh debug'
-alias yant='cd hybris/bin/platform && . ./setantenv.sh && cd -'
-alias ysolr='java -Dsolr.solr.home=multicore -jar start.jar'
-alias redis_start='redis-server /usr/local/etc/redis.conf'
-alias es_start='elasticsearch --config=/usr/local/opt/elasticsearch/config/elasticsearch.yml'
+# alias lall='CLICOLOR_FORCE=true lal | less -R'
+# alias hs='history | grep'
+# alias pg='ps aux | grep'
+# alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+# alias pg_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+# alias mysql_start='mysql.server start'
+# alias mysql_stop='mysql.server stop'
+# alias ystart='hybris/bin/platform/hybrisserver.sh debug'
+# alias yant='cd hybris/bin/platform && . ./setantenv.sh && cd -'
+# alias ysolr='java -Dsolr.solr.home=multicore -jar start.jar'
+# alias redis_start='redis-server /usr/local/etc/redis.conf'
+# alias es_start='elasticsearch --config=/usr/local/opt/elasticsearch/config/elasticsearch.yml'
 
 # tmux aliases
 alias tl='tmux ls'
@@ -39,12 +38,13 @@ function ta { tmux attach -t "$1" || tmux new -s "$1"; }
 alias profileme="history | awk '{print \$5}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
 # bash completions
-[[ -f "$HOME/.lein/bash_completion.bash" ]] && source "$HOME/.lein/bash_completion.bash"
-[[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
+# [[ -f "$HOME/.lein/bash_completion.bash" ]] && source "$HOME/.lein/bash_completion.bash"
+HOMEBREW_PREFIX="$(brew --prefix)"
+[[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 complete -C aws_completer aws
 # keep completion for aliased commands
 # g = git
-complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \ || complete -o default -o nospace -F _git g
+__git_complete g __git_main
 
 # AWS
 export AWS_DEFAULT_PROFILE=lane
@@ -131,10 +131,30 @@ fi
 export MYSQL_PS1="[\\r:\\m:\\s] \\u@\\h (\\d) > "
 
 # rvm
-export PATH="$PATH:$HOME/.rvm/bin"
-# Load RVM into a shell session as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# export PATH="$PATH:$HOME/.rvm/bin"
+# # Load RVM into a shell session as a function*
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# For getting python installed with tcl-tk (for Matplotlib), requires having tcl-tk and zlib installed
+# For compilers to find zlib you may need to set:
+# export LDFLAGS="${LDFLAGS} -L/usr/local/opt/zlib/lib"
+# export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/zlib/include"
+# For pkg-config to find zlib you may need to set:
+# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
+# export LDFLAGS="${LDFLAGS} -L/usr/local/opt/tcl-tk/lib"
+# export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/tcl-tk/include"
+# export PATH=$PATH:/usr/local/opt/tcl-tk/bin
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
+# VSCode 'code' CLI
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
