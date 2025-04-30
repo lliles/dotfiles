@@ -114,13 +114,22 @@ export MYSQL_PS1="[\\r:\\m:\\s] \\u@\\h (\\d) > "
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# pyenv virtualenv plugin to automatically activate envs
+eval "$(pyenv virtualenv-init -)"
 
 # VSCode 'code' CLI
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
+# nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# java 11 for tinkerpop
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/lane/.cache/lm-studio/bin"
