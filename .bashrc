@@ -133,3 +133,6 @@ export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/lane/.cache/lm-studio/bin"
+
+# Added by uv install script
+. "$HOME/.local/bin/env"
